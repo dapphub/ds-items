@@ -71,12 +71,13 @@ contract DSItems is DSThing {
         relies[msg.sender][whom] = false;
     }
     function memo(uint256 item, bytes32 what)
+        public
     {
         require(handler[item] == msg.sender);
         memos[item] = what;
     }
     function mark(uint256 item, bytes32 what)
-        auth
+        auth public
     {
         marks[item] = what;        
     }
