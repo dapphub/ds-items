@@ -17,15 +17,15 @@
 
 pragma solidity ^0.4.19;
 
-import 'ds-auth/auth.sol';
+import 'ds-thing/thing.sol';
 
-contract DSItems is DSAuth {
+contract DSItems is DSThing {
     mapping( uint256 => address )  public handler;
     mapping( address =>
         mapping( address => bool)) public relies; // hodler -> mover -> ok
 
-    mapping( uint256 => bytes32 )  public memos;
-    mapping( uint256 => bytes32 )  admindata;
+    mapping( uint256 => bytes32 )  public memos; // user data
+    mapping( uint256 => bytes32 )  public marks; // auth data
 
     function init(uint256 obj, address where)
         auth public
@@ -74,5 +74,10 @@ contract DSItems is DSAuth {
     {
         require(handler[item] == msg.sender;
         memos[item] = what;
+    }
+    function mark(uint256 item, bytes32 what)
+        auth
+    {
+        marks[item] = what;        
     }
 }
