@@ -25,31 +25,41 @@ contract DSItems is DSAuth {
         mapping( address => bool)) public relies; // hodler -> mover -> ok
 
     function init(uint256 obj, address where)
-        auth
+        auth public
     {
         require( handler[obj] == 0x0 );
         handler[obj] = where;
     }
     function init(uint256 obj)
-        auth
+        auth public 
     {
         require( handler[obj] == 0x0 );
-        handler[obj] == msg.sender;
+        handler[obj] = msg.sender;
     }
-    function move(uint256 obj, address from, address to) {
+    function move(uint256 obj, address from, address to)
+        public
+    {
         require( msg.sender == handler[obj] || relies[from][this]);
         handler[obj] = to;
     }
-    function pull(uint256 obj, address from) {
+    function pull(uint256 obj, address from)
+        public
+    {
         move(obj, from, this);
     }
-    function push(uint256 obj, address to) {
+    function push(uint256 obj, address to)
+        public
+    {
         move(obj, this, to);
     }
-    function rely(address whom) {
+    function rely(address whom)
+        public
+    {
         relies[msg.sender][whom] = true;
     }
-    function deny(address whom) {
+    function deny(address whom)
+        public
+    {
         relies[msg.sender][whom] = false;
     }
 }
