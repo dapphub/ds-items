@@ -1,9 +1,7 @@
-
-
 contract DSItems is DSAuth {
     mapping( uint256 => address )  public handler;
     mapping( address =>
-        mapping( address => bool)  public relies; // hodler -> mover -> ok
+        mapping( address => bool)) public relies; // hodler -> mover -> ok
 
     function init(uint256 obj, address where)
         auth
