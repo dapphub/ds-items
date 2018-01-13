@@ -24,6 +24,9 @@ contract DSItems is DSAuth {
     mapping( address =>
         mapping( address => bool)) public relies; // hodler -> mover -> ok
 
+    mapping( uint256 => bytes32 )  public memos;
+    mapping( uint256 => bytes32 )  admindata;
+
     function init(uint256 obj, address where)
         auth public
     {
@@ -34,6 +37,11 @@ contract DSItems is DSAuth {
         auth public 
     {
         require( handler[obj] == 0x0 );
+        handler[obj] = msg.sender;
+    }
+    function yank(uint256 obj)
+        auth public
+    {
         handler[obj] = msg.sender;
     }
     function move(uint256 obj, address from, address to)
@@ -61,5 +69,10 @@ contract DSItems is DSAuth {
         public
     {
         relies[msg.sender][whom] = false;
+    }
+    function memo(uint256 item, bytes32 what)
+    {
+        require(handler[item] == msg.sender;
+        memos[item] = what;
     }
 }
