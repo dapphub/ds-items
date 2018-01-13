@@ -72,7 +72,7 @@ contract DSItems is DSThing {
     }
     function memo(uint256 item, bytes32 what)
     {
-        require(handler[item] == msg.sender;
+        require(handler[item] == msg.sender);
         memos[item] = what;
     }
     function mark(uint256 item, bytes32 what)
